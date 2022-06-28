@@ -64,6 +64,7 @@ Template("bell_bottoms.csv", row =>
             .add(getImage("target"),getImage("distractor"))
             .frame("solid 5px purple")
             .log()
+	    .shuffle()
             .wait()
         ,
         
