@@ -62,7 +62,6 @@ Template("bell_bottoms.csv", row =>
         //Allow to select
         newSelector("answer_study")
             .add(getImage("target"),getImage("distractor"))
-            .shuffle()
             .frame("solid 5px purple")
             .log()
             .wait()
