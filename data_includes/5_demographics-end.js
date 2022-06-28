@@ -16,25 +16,8 @@ newTrial("demographics",
         .center()
         .print()
         .log()
-    ,
-    newText("What sex were you assigned at birth, on your original birth certificate?")
-        .css({"width":"700px", "margin-top":"20px"})
-        .center()
     ,        
-    newScale("enter_sex", 
-        "Female",
-        "Male",
-        "I don't understand what this means",
-        "Prefer not to answer")
-        .radio() 
-        .labelsPosition("right")
-        .vertical()
-        .cssContainer("width", "700px")
-        .center()
-        .print()
-        .log()
-    ,
-    newText("What is your current gender?")
+    newText("What is your gender?")
         .css({"width":"700px", "margin-top":"20px"})
 		.center()
     ,
@@ -45,30 +28,6 @@ newTrial("demographics",
         .print()
         .log()
     ,    
-    newText("How do you describe your sexuality? <br><i>(Check all that apply.)</i>")
-        .css("width", "700px")
-		.css("margin-top", "20px")
-		.center()
-    ,
-    newScale("enter_sexuality",
-        "Asexual", "Bisexual/Pansexual", "Gay/Lesbian",
-        "Heterosexual/Straight", "Queer", "Questioning",
-        "Prefer not to answer", "I use a different term:")
-        .checkbox()
-        .vertical()
-        .center()
-        .print()
-        .cssContainer("width", "700px")
-        .log()
-    ,
-    newTextInput("sexuality_writein", "") 
-        .css("width", "300px")
-        .cssContainer({"width":"700px", "margin-top":"5px"})
-        .center()
-        .print()
-        .print()
-        .log()
-	,
     newText("race", "How do you describe your race/ethnicity? <br>(Check all that apply.)")
         .css("width", "700px")
 		.css("margin-top", "20px")
@@ -100,23 +59,7 @@ newTrial("demographics",
         .print()
         .log()
     ,
-    newText("What is your highest education level?")
-        .css("width", "700px")
-		.css("margin-top", "20px")
-		.center()
-	,
-	newScale("enter_ed",
-	    "Less than high school", "High school graduate", "Some college",  
-        "2 year degree", "4 year degree", "Professional degree",
-        "Doctorate", "Prefer not to answer")
-        .radio()
-        .labelsPosition("right")
-        .vertical()
-        .cssContainer("width", "700px")
-        .center()
-        .print()
-        .log()
-    ,
+
     newText("english", "Please rate your overall ability in the English language:")
         .css("width", "700px")
 		.css("margin-top", "20px")
