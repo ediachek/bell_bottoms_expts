@@ -2,26 +2,12 @@ PennController.ResetPrefix(null)
 
 Sequence(
 	//SETUP
-    "preload",             //Preload images
-    "instructions_start",  //Instructions about the study
-    "catch_trials",        //Catch trials
-    "consent",             //Consent form
-    "init",                //Get microphone permission
-    "mic_test",            //Test microphone
-    "counter",             //Increment group assignment counter for people who start
-	//ATTITUDE QUESTIONS
-	"rate_sentences",      //Acceptability/naturalness judgments
-	"they_familiarity",    //Familiarity with singular they
-	"transphobia_scale",   //Gender essentialism/binary attitudes
+    "instructions",  //Instructions about the study
+    "consent",       //Consent form
+    "catch_trials",  //Catch trials
 	//EXPERIMENT
-    "instructions_characters",      //Introduce characters
-    randomize("characters"), 
-    "instructions_example_trials",  //Example trials
-    randomize("trials_example"),
-    "instructions_practice",        //Practice trials
-    sepWith("sync", randomize("trials_practice")),
-    "instructions_test",            //Test trials
-    sepWith("sync", randomize("trials_test")),
+    randomize("trials_study"),
+    randomize("trials_test"),
     //DEMOGRAPHICS, END
     "demographics",         //Demographics questions
     SendResults(),          //Send results

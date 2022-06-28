@@ -44,12 +44,12 @@ newTrial("catch_trials",
         .size(100, 30)
         .print()
     ,
-    newText("catch2_text", "Type the word that you hear in upper case.")
+    newText("catch2_text", "Type the word that you hear in lower case.")
         .center()
         .css("margin-top", "50px")
         .css("margin-bottom", "15px")
     ,
-    newAudio("catch2_audio", "catch_word.mp3")
+    newAudio("catch2_audio", "catch_audio1.m4a")
         .center()
         .print()
     ,
@@ -61,51 +61,6 @@ newTrial("catch_trials",
     ,
     newButton("next", "Next")
         .wait(getTextInput("catch_answer").test.text(/six/)
-        .and(getTextInput("catch2_answer").test.text(/LANGUAGE/)))
+        .and(getTextInput("catch2_answer").test.text(/tall tree 1 2 3/)))
         
-);
-
-newTrial("mic_test",
-    newHtml("mic_test", "ins_mic-test.html")
-        .css("width", "30em")
-    ,
-    newScale("mic_working", "Continue", 
-            "I can't or don't want to record audio")
-        .radio()
-        .css("min-width", "30em")
-        .center()
-        .labelsPosition("right")
-        .vertical()
-        .print()
-        .wait()
-        .test.selected("I can't or don't want to record audio")
-        .success(
-            clear(),
-            newText("leave", "You indicated that you can't record audio, so the study will not begin."),
-            SendResults(),
-            newButton().hidden().wait())
-    ,
-    getScale("mic_working").remove(),
-    
-    newMediaRecorder("test-mic", "audio")
-        .center()
-        .print()
-        .record()
-        .wait("playback")
-    ,
-    newScale("mic_working2", "My mic is working", 
-            "I can't or don't want to record audio")
-        .radio()
-        .css("min-width", "30em")
-        .center()
-        .labelsPosition("right")
-        .vertical()
-        .print()
-        .wait()
-        .test.selected("I can't or don't want to record audio")
-        .success(
-            clear(),
-            newText("leave", "You indicated that you can't record audio, so the study will not begin."),
-            SendResults(),
-            newButton().remove().wait())
 );
