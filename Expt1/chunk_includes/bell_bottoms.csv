@@ -1,5 +1,0 @@
-﻿item,condition,clothing_image,animal_image,audio,target
-1,modifier,1.1.png,ant.png,word1_60.mp3,1.1.png
-2,no_modifier,2.1.png,bat.png,word2_60.mp3,2.1.png
-3,modifier,3.1.png,bear.png,word3_60.mp3,3.1.png
-4,no_modifier,4.1.png,bee.png,word4_60.mp3,4.1.png
