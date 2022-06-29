@@ -2,12 +2,16 @@ PennController.ResetPrefix(null)
 
 Sequence(
 	//SETUP
-    "instructions",  //Instructions about the study
+    "introduction",  //Introduction to the study
     "consent",       //Consent form
+    "instructions_catch_trials", //Catch trials instructions
     "catch_trials",  //Catch trials
-	//EXPERIMENT
-    randomize("trials_study"),
-    randomize("trials_test"),
+	//EXPERIMENT -- STUDY
+	"instructions_study",      //Instructions to the study phase
+    randomize("trials_study"), //Study trials
+    //EXPERIMENT -- TEST
+    "instructions_test",       //Instructions to the test phase
+    randomize("trials_test"),  //Test trials
     //DEMOGRAPHICS, END
     "demographics",         //Demographics questions
     SendResults(),          //Send results
@@ -16,15 +20,6 @@ Sequence(
 
 //Preload images
 CheckPreloaded().label("preload");
-
-//Increment group counter at beginning
-SetCounter("counter", "inc", 1);
-
-//Replace the URL with one that points to a PHP file on your own webserver
-InitiateRecorder("https://my.server/path/to/file.php").label("init");
-
-//Trial to upload recordings, then continue automatically.
-UploadRecordings("sync","noblock");
 
 //Default formatting
 Header(

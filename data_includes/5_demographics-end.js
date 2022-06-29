@@ -1,49 +1,63 @@
-//Demographics questions: age, sex, gender, sexuality
-//race, ethnicity, education, English ability
+//Demographics Questions: age, sex, gender, race, ethnicity, English
 
 newTrial("demographics",
     newText("To wrap up, please answer these demographic questions.")
         .css({"width":"700px", "margin-top":"20px", "margin-bottom":"20px"})
 		.center()
 	,
-	newText("Age:")
-        .css({"width":"700px", "margin-top":"20px"})
+	newText("<b>Age:</b>")
+        .css({"width":"700px", "margin-top":"20px","text-align":"left"})
 		.center()
     ,
     newTextInput("enter_age", "")
         .css("width", "200px")
-        .cssContainer({"width":"700px" , "margin-top":"5px"})
+        .cssContainer({"width":"700px"})
         .center()
         .print()
         .log()
     ,        
-    newText("What is your gender?")
-        .css({"width":"700px", "margin-top":"20px"})
+    newText("<b>What is your gender?</b>")
+        .css({"width":"700px", "margin-top":"10px","text-align":"left"})
 		.center()
     ,
     newTextInput("enter_gender", "")
         .css("width", "200px")
-        .cssContainer({"width":"700px" , "margin-top":"5px"})
+        .cssContainer({"width":"700px"})
         .center()
         .print()
         .log()
-    ,    
-    newText("race", "How do you describe your race/ethnicity? <br>(Check all that apply.)")
-        .css("width", "700px")
-		.css("margin-top", "20px")
+    ,
+    newText("<b>How do you describe your race/ethnicity?</b>")
+        .css({"width":"700px", "margin-top":"20px", "margin-bottom":"20px", "text-align":"left"})
 		.center()
     ,
     newScale("enter_race", 
-        "American Indian or Alaska Native", 
-        "Asian",
-        "Black, African American, or African", 
-        "Hispanic, Latino, or Spanish",
-        "Middle Eastern or North African",
-        "Native Hawaiian or Pacific Islander",
-        "White", 
-        "Prefer not to answer", 
-        "I use a different term:")
+        "American Indian or Alaska Native", "Asian",
+        "Black or African American", "Native Hawaiian or Pacific Islander",
+        "Other", "Prefer not to answer")
         .checkbox()
+        .labelsPosition("right")
+        .vertical()
+        .cssContainer({"width":"700px"})
+        .center()
+        .print()
+        .log()
+    ,
+    newTextInput("enter_race_writein", "")
+        .before(newText("I use a different term:"))
+        .css("width", "200px")
+        .cssContainer({"width":"700px", "margin-top":"5px"})
+        .center()
+        .print()
+        .log()
+    ,
+	newText("ethnicity","<b>Ethnicity:</b>")
+        .css({"width":"700px", "margin-top":"20px", "margin-bottom":"20px", "text-align":"left"})
+		.center()
+    ,
+    newScale("enter_ethnicity",
+        "Hispanic/Latino", "Not Hispanic/Latino", "Prefer not to answer")
+        .radio()
         .labelsPosition("right")
         .vertical()
         .cssContainer("width", "700px")
@@ -51,18 +65,8 @@ newTrial("demographics",
         .print()
         .log()
     ,
-    newTextInput("enter_race_writein", "")
-        .css("width", "300px")
-        .cssContainer({"width":"700px", "margin-top":"5px"})
-        .center()
-        .print()
-        .print()
-        .log()
-    ,
-
-    newText("english", "Please rate your overall ability in the English language:")
-        .css("width", "700px")
-		.css("margin-top", "20px")
+    newText("english", "<b>Please rate your overall ability in the English language:</b>")
+        .css({"width":"700px", "margin-top":"20px","text-align":"left"})
 		.center()
     ,
     newScale("enter_english", 
@@ -74,7 +78,7 @@ newTrial("demographics",
         .radio()
         .labelsPosition("right")
         .vertical()
-        .cssContainer("width", "700px")
+        .cssContainer({"width":"700px", "margin-top":"20px"})
         .center()
         .print()
         .log()
@@ -82,13 +86,11 @@ newTrial("demographics",
     newButton("Next")
         .wait(getTextInput("enter_age").test.text(/\d+/)
             .and(getTextInput("enter_gender").test.text(/\w+/))
-            .and(getScale("enter_sexuality").test.selected)
             .and(getScale("enter_race").test.selected())
             .and(getScale("enter_english").test.selected())
-            .and(getScale("enter_ed").test.selected()))
-).log("PROLIFIC_ID", GetURLParameter("PROLIFIC_ID"));
+)).log("PROLIFIC_ID", GetURLParameter("PROLIFIC_ID"));
 
-//Validation instructions
+//Validation Instructions
 newTrial("validation",
     newText("Add Prolific validation: https://doc.pcibex.net/how-to-guides/using-prolific/")
     ,

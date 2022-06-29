@@ -1,41 +1,28 @@
 PennController.ResetPrefix(null)
 
-// Instructions
-newTrial("instructions",
+//Instructions Phase 1
+newTrial("instructions_study",
     defaultText
-        .cssContainer({"margin-bottom":"1em"})
+        .cssContainer({"margin-bottom":"1em","line-height":"1.5"})
         .center()
         .print()
     ,
-    newText("instructions-1", "Welcome!")
-    ,
-    newText("instructions-2", "In this experiment, you will see two images and hear a sentence describing one of them.")
-    ,
-    newText("instructions-3", "<b>Click on the image as instructed in the sentence you hear.</b>")
-    ,
-    newText("instructions-4", "To start the experiment, please enter your ID and then click the button below.")
-    ,
-    newTextInput("input_ID")
-        .cssContainer({"margin-bottom":"1em"})
-        .center()
-        .print()
-    ,
-    newButton("wait", "Click to start the experiment")
-        .center()
-        .print()
-        .wait()
-    ,
-    newVar("ID")
-        .global()
-        .set(getTextInput("input_ID"))
-        .log()
-)
 
-//Begin Phase 1
+    newText("instructions_study1", "Great job! You are now ready to begin the study."),
+    
+    newText("instructions_study2", " In this section, you will see two images on the screen and hear an audio instruction. Your task is to click on the image as instructed in the audio."),
 
-//Phase 1: Study trials [randomized in Sequence]
+    newButton("next", "Next").wait()
+);
+
+//Phase 1: Study Trials [randomized in Sequence]
 Template("bell_bottoms.csv", row =>
     newTrial("trials_study",
+    
+        newText("study_question","Click on the image as described in the audio")
+            .center()
+            .cssContainer({"margin-bottom":"1em"})
+        ,
      
         //Load images
         newImage("target", row.clothing_image).size(400,500),
@@ -46,25 +33,24 @@ Template("bell_bottoms.csv", row =>
         
         //Display images
         newCanvas("image_study", 1000, 500)
-            .add(0 , 0 , getImage("target") )
-            .add(500 , 0, getImage("distractor") )
-            .center()
+            .add( 0, 50, getImage("target") )
+            .add(500, 50, getImage("distractor") )
             .print()
+            .center()
             .log()
         ,
         
         //Play audio with instructions
         getAudio("context audio")
             .play()
-            .wait()
         ,
         
         //Allow to select
         newSelector("answer_study")
-            .add(getImage("target"),getImage("distractor"))
-            .frame("solid 5px purple")
+            .add(getImage("target"), getImage("distractor"))
+            .shuffle()
+            .frame("solid 3px green")
             .log()
-	    .shuffle()
             .wait()
         ,
         
@@ -75,30 +61,40 @@ Template("bell_bottoms.csv", row =>
     .log("item_id", row.item)
 	.log("condition", row.condition)
 
-)
+);
 
-//Continue to Phase 2
-newTrial(
-    newButton("Continue the experiment").center().print().wait()
-)
+//Instructions Phase 2
+newTrial("instructions_test",
+    defaultText
+        .cssContainer({"margin-bottom":"1em","line-height":"1.5"})
+        .center()
+        .print()
+    ,
+  
+    newText("instructions_test1", "You have reached the end of this section. You will now begin the second (and last) part of the study."),
+    
+    newText("instructions_test2", "In this section, you will see one image on the screen. Your task is to click <b>OLD</b> if you remember seeing that image or click <b>NEW</b> if you don't remember seeing that image from the first part of the study."),
 
-//Phase 2: Test trials [randomized in Sequence]
+    newButton("next", "Next").wait()
+);
+
+//Phase 2: Test Trials [randomized in Sequence]
 Template("bell_bottoms_test.csv", row =>
     newTrial("trials_test",
     
         //Question
-        newText("Click <b>OLD</b> (or press LEFT ARROW) if you remember seeing this picture during study").print().center(),
-        
-        newText("</br> Click <b>NEW</b> (or press RIGHT ARROW) if you <b>don't</b> remember seeing this picture during study </br>").print().center(),
-     
+        newText("Is this clothing item OLD or NEW?").print().center().cssContainer({"margin-bottom":"1em"}),
+
         //Load images
         newImage("image_presented", row.image_presented).size(300,400),
 
         //Display images
         newCanvas("image_test", 1000, 500)
             .add(350 , 0 , getImage("image_presented") )
-            .add(300 , 450 , newButton("OLD") )
-            .add( "right at 75%" , 450 , newButton("NEW") )
+            .add(350 , 450 , newButton("OLD") )
+            .add("right at 65%"  , 450 , newButton("NEW") )
+            .add(300, 525, newText("or LEFT ARROW"))
+            .add("right at 70%" , 525, newText("or RIGHT ARROW"))
             .center()
             .print()
             .log()
@@ -111,10 +107,10 @@ Template("bell_bottoms_test.csv", row =>
             .wait()
         ,
 
-        newTimer("post-trial_test", 1500).start().wait() //wait 2s
+        newTimer("post-trial_test", 500).start().wait() //wait 500 ms
     )
     
-        //Log trial variables
+    //Log trial variables
     .log("item_id", row.item)
 	.log("condition", row.image_status)
 	.log("correct_answer", row.correct_answer)
